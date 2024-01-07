@@ -24,6 +24,8 @@ func main() {
 
 	edit, preview := cfg.makeUI()
 
+	cfg.createMenuItem(w)
+
 	w.SetContent(container.NewHSplit(edit, preview))
 
 	w.Resize(fyne.Size{Width: 800, Height: 500})
@@ -42,4 +44,20 @@ func (app *config) makeUI() (*widget.Entry, *widget.RichText) {
 	edit.OnChanged = preview.ParseMarkdown
 
 	return edit, preview
+}
+
+func (app *config) createMenuItem(win fyne.Window) {
+
+	openMenuItem := fyne.NewMenuItem("Open...", func() {})
+
+	saveMenuItem := fyne.NewMenuItem("Save...", func() {})
+
+	saveMenuAsItem := fyne.NewMenuItem("SaveAs...", func() {})
+
+	fileMenu := fyne.NewMenu("Menu", openMenuItem, saveMenuItem, saveMenuAsItem)
+
+	menu := fyne.NewMainMenu(fileMenu)
+
+	win.SetMainMenu(menu)
+
 }
