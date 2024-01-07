@@ -2,7 +2,8 @@
 
 # Requirements
 - Go Language
-- Idea
+- Idea (VScode,IntelliJ,GoLand and etc)
 
 # Tools used 
 - Fyne (open-source cross-platform widget toolkit )
+  Link: https://fyne.io/
