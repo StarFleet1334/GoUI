@@ -32,5 +32,7 @@ func main() {
 
 	if n, err := strconv.Atoi(os.Args[1]); err == nil {
 		fmt.Println("There was no error, n is:", n)
+	} else if err != nil {
+		fmt.Println("There was an error:", err)
 	}
 }
