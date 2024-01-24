@@ -3,15 +3,34 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func main() {
+	var speed int
+	var heat float64
+	var off bool
+	var brand string
 
-	// Getting Input From Terminal using go
-	fmt.Printf("%#v\n", os.Args)
+	fmt.Printf("%T\n", speed)
+	fmt.Printf("%T\n", heat)
+	fmt.Printf("%T\n", off)
+	fmt.Printf("%T\n", brand)
 
-	fmt.Println("First argument:", os.Args[0])
-	fmt.Print("Second argument:", os.Args[1])
+	//age := os.Args[1]
+	//n, err := strconv.Atoi(age)
+	//
+	//if err != nil {
+	//	fmt.Printf("There was a error %v", err)
+	//	return
+	//} else {
+	//	fmt.Printf("There was no error, answer was %v", n)
+	//}
+	//
 
-	fmt.Print("Total number of arguments:", len(os.Args))
+	// Simple Statement usage
+
+	if n, err := strconv.Atoi(os.Args[1]); err == nil {
+		fmt.Println("There was no error, n is:", n)
+	}
 }
