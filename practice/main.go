@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strconv"
 )
 
 func main() {
@@ -30,16 +28,28 @@ func main() {
 
 	// Simple Statement usage
 
-	var (
-		n   int
-		err error
-	)
+	//var (
+	//	n   int
+	//	err error
+	//)
+	//
+	//if n, err := strconv.Atoi(os.Args[1]); err == nil {
+	//	fmt.Println("There was no error, n is:", n)
+	//} else if err != nil {
+	//	fmt.Println("There was an error:", err)
+	//}
+	//
+	//fmt.Printf("Because of Shadowing values are n: %d, err: %v", n, err)
 
-	if n, err := strconv.Atoi(os.Args[1]); err == nil {
-		fmt.Println("There was no error, n is:", n)
-	} else if err != nil {
-		fmt.Println("There was an error:", err)
+	i := 142
+	switch {
+	case i > 100:
+		fmt.Print("big ")
+		fallthrough
+	case i > 100:
+		fmt.Print("positive ")
+		fallthrough
+	default:
+		fmt.Print("number")
 	}
-
-	fmt.Printf("Because of Shadowing values are n: %d, err: %v", n, err)
 }
