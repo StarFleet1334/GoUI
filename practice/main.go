@@ -30,9 +30,16 @@ func main() {
 
 	// Simple Statement usage
 
+	var (
+		n   int
+		err error
+	)
+
 	if n, err := strconv.Atoi(os.Args[1]); err == nil {
 		fmt.Println("There was no error, n is:", n)
 	} else if err != nil {
 		fmt.Println("There was an error:", err)
 	}
+
+	fmt.Printf("Because of Shadowing values are n: %d, err: %v", n, err)
 }
