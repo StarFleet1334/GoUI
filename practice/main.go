@@ -1,25 +1,33 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
+	"time"
 )
 
 func main() {
 
-	// 1. uncomment the code below
-	png, header := []byte{'P', 'N', 'G'}, []byte{}
+	var (
+		pizza_toppings   []string
+		departure_times  []time.Time
+		graduation_years []int
+		states_of_lights []bool
+	)
 
-	// 2. append elements to header to make it equal with the png slice
-	header = append(png, header...)
+	pizza_toppings = append(pizza_toppings, "pepperoni", "onions", "extra cheese")
 
-	// 3. compare the slices using the bytes.Equal function
-	check := bytes.Equal(png, header)
+	now := time.Now()
+	departure_times = append(departure_times,
+		now,
+		now.Add(time.Hour*24), // 24 hours after `now`
+		now.Add(time.Hour*48)) // 48 hours after `now`
 
-	// 4. print whether they're equal or not
-	if check {
-		fmt.Println("They are equal")
-	} else {
-		fmt.Println("They are not equal")
-	}
+	graduation_years = append(graduation_years, 1998, 2005, 2018)
+
+	states_of_lights = append(states_of_lights, true, false, true)
+
+	fmt.Printf("pizza       : %s\n", pizza_toppings)
+	fmt.Printf("\ngraduations : %d\n", graduation_years)
+	fmt.Printf("\ndepartures  : %s\n", departure_times)
+	fmt.Printf("\nlights      : %t\n", states_of_lights)
 }
