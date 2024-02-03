@@ -4,29 +4,38 @@ import "fmt"
 
 func main() {
 
-	// Declaring nil Slices
+	// Declaration of Arrays
 
-	var (
-		names     []string
-		distances []int
-		data      []uint8
-		ratios    []float64
-		alives    []bool
-	)
-	names = []string{"Saba", "Luka", "Gio"}
-	distances = []int{1, 2, 3, 4, 5}
-	data = []uint8{'I', 'N', 'A', 'N', 'C'}
-	ratios = []float64{1.1, 1.2}
-	alives = []bool{true, false, false, false}
+	names := [3]string{"Einstein", "Tesla", "Shepard"}
+	distances := [...]int{50, 40, 75, 30, 125}
+	data := [5]byte{'H', 'E', 'L', 'L', 'O'}
+	ratios := [1]float64{3.14145}
+	alives := [...]bool{true, false, true, false}
+	zero := [0]byte{}
 
-	fmt.Printf("names    : %T %d %t \n", names, len(names), names == nil)
+	fmt.Printf("names    : %[1]T %[1]q\n", names)
+	fmt.Printf("distances: %[1]T %[1]d\n", distances)
+	fmt.Printf("data     : %[1]T %[1]d\n", data)
+	fmt.Printf("ratios   : %[1]T %.2[1]f\n", ratios)
+	fmt.Printf("alives   : %[1]T %[1]t\n", alives)
+	fmt.Printf("zero     : %[1]T %[1]d\n", zero)
 
-	fmt.Printf("distances    :  %T %d %t \n", distances, len(distances), data == nil)
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
 
-	fmt.Printf("data    :  %T %d %t \n", data, len(data), data == nil)
+	names_slices := []string{"Einstein", "Tesla", "Shepard"}
+	distances_slices := []int{50, 40, 75, 30, 125}
+	data_slices := []byte{'H', 'E', 'L', 'L', 'O'}
+	ratios_slices := []float64{3.14145}
+	alives_slices := []bool{true, false, true, false}
+	zero_slices := []byte{}
 
-	fmt.Printf("ratios    :  %T %d %t \n", ratios, len(ratios), ratios == nil)
-
-	fmt.Printf("alives    :  %T %d %t", alives, len(alives), alives == nil)
+	fmt.Printf("names    : %[1]T %[1]q\n", names_slices)
+	fmt.Printf("distances: %[1]T %[1]d\n", distances_slices)
+	fmt.Printf("data     : %[1]T %[1]d\n", data_slices)
+	fmt.Printf("ratios   : %[1]T %.2[1]f\n", ratios_slices)
+	fmt.Printf("alives   : %[1]T %[1]t\n", alives_slices)
+	fmt.Printf("zero     : %[1]T %[1]d\n", zero_slices)
 
 }
