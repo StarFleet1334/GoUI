@@ -1,30 +1,25 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
-	"slices"
-	"strings"
 )
 
 func main() {
 
-	namesA := "Da Vinci, Wozniak, Carmack"
-	namesB := []string{"Wozniak", "Da Vinci", "Carmack"}
+	// 1. uncomment the code below
+	png, header := []byte{'P', 'N', 'G'}, []byte{}
 
-	namesA_slice := strings.Split(namesA, ",")
-	slices.Sort(namesA_slice)
-	slices.Sort(namesB)
+	// 2. append elements to header to make it equal with the png slice
+	header = append(png, header...)
 
-	if len(namesA_slice) != len(namesB) {
-		fmt.Println("Two slices are not equal")
-		return
+	// 3. compare the slices using the bytes.Equal function
+	check := bytes.Equal(png, header)
+
+	// 4. print whether they're equal or not
+	if check {
+		fmt.Println("They are equal")
 	} else {
-		for index, _ := range namesA_slice {
-			if namesA_slice[index] != namesB[index] {
-				fmt.Println("Two slices are not equal")
-				return
-			}
-		}
-		fmt.Println("Two slices are equal")
+		fmt.Println("They are not equal")
 	}
 }
