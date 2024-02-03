@@ -5,15 +5,19 @@ import "fmt"
 func main() {
 
 	// Declaring nil Slices
-	var names []string
 
-	var distances []int
-
-	var data []uint8
-
-	var ratios []float64
-
-	var alives []bool
+	var (
+		names     []string
+		distances []int
+		data      []uint8
+		ratios    []float64
+		alives    []bool
+	)
+	names = []string{}
+	distances = []int{}
+	data = []uint8{}
+	ratios = []float64{}
+	alives = []bool{}
 
 	fmt.Printf("names    : %#v %d %t \n", names, len(names), names == nil)
 
