@@ -1,74 +1,28 @@
 package main
 
-import (
-	"fmt"
-	"os"
-	"strconv"
-)
+import "fmt"
 
 func main() {
-	var speed int
-	var heat float64
-	var off bool
-	var brand string
 
-	fmt.Printf("%T\n", speed)
-	fmt.Printf("%T\n", heat)
-	fmt.Printf("%T\n", off)
-	fmt.Printf("%T\n", brand)
+	// Declaring nil Slices
+	var names []string
 
-	//age := os.Args[1]
-	//n, err := strconv.Atoi(age)
-	//
-	//if err != nil {
-	//	fmt.Printf("There was a error %v", err)
-	//	return
-	//} else {
-	//	fmt.Printf("There was no error, answer was %v", n)
-	//}
-	//
+	var distances []int
 
-	// Simple Statement usage
+	var data []uint8
 
-	//var (
-	//	n   int
-	//	err error
-	//)
-	//
-	//if n, err := strconv.Atoi(os.Args[1]); err == nil {
-	//	fmt.Println("There was no error, n is:", n)
-	//} else if err != nil {
-	//	fmt.Println("There was an error:", err)
-	//}1
-	//
-	//fmt.Printf("Because of Shadowing values are n: %d, err: %v", n, err)
-	var (
-		number int
-		err    error
-	)
+	var ratios []float64
 
-	if n := os.Args; len(n) < 1 {
-		fmt.Println("There was no argument")
-	} else if err != nil {
-		fmt.Println("There was an error")
-	} else {
-		number, err = strconv.Atoi(n[1])
+	var alives []bool
 
-	}
+	fmt.Printf("names    : %#v %d %t \n", names, len(names), names == nil)
 
-	fmt.Println(len(os.Args))
-	fmt.Printf("%s", "X")
-	for i := 0; i <= number; i++ {
-		fmt.Printf("%10d", i)
-	}
-	fmt.Println()
-	for i := 0; i <= number; i++ {
-		fmt.Printf("%d", i)
-		for j := 0; j <= number; j++ {
-			fmt.Printf("%10d", i*j)
+	fmt.Printf("distances    :  %#v %d %t \n", distances, len(distances), data == nil)
 
-		}
-		fmt.Println()
+	fmt.Printf("data    :  %#v %d %t \n", data, len(data), data == nil)
 
-	}
+	fmt.Printf("ratios    :  %#v %d %t \n", ratios, len(ratios), ratios == nil)
+
+	fmt.Printf("alives    :  %#v %d %t", alives, len(alives), alives == nil)
+
 }
