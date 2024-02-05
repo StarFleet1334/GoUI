@@ -1,28 +1,56 @@
 package main
 
 import (
-	s "github.com/inancgumus/prettyslice"
-	"github.com/inancgumus/screen"
-	"math/rand"
-	"time"
+	"fmt"
+	"github.com/inancgumus/prettyslice"
 )
 
 type collection []string
 
 func main() {
-	s.PrintBacking = true
-	s.MaxPerLine = 30
-	s.Width = 150
+	//// DON'T TOUCH THE FOLLOWING CODE
+	//nums := []int{56, 89, 15, 25, 30, 50}
+	//
+	//// ----------------------------------------
+	//// ONLY ADD YOUR CODE HERE
+	////
+	//// Ensure that nums slice never changes even though
+	//// the mine slice changes.
+	//mine := nums
+	//// ----------------------------------------
+	//
+	//// DON'T TOUCH THE FOLLOWING CODE
+	////
+	//// This code changes the elements of the nums
+	//// slice.
+	////
+	//mine[0], mine[1], mine[2] = -50, -100, -150
+	//
+	//fmt.Println("Mine         :", mine)
+	//fmt.Println("Original nums:", nums[:3])
+	prettyslice.MaxPerLine = 6
+	// DON'T TOUCH THE FOLLOWING CODE
+	nums := []int{56, 89, 15, 25, 30, 50}
 
-	var nums []int
+	// ----------------------------------------
+	// ONLY ADD YOUR CODE HERE
+	//
+	// Ensure that nums slice never changes even though
+	// the mine slice changes.
 
-	screen.Clear()
-	for cap(nums) <= 128 {
-		screen.MoveTopLeft()
+	// Solution #1
+	//mine := [3]int{}
+	//mine = [3]int(append(mine[:], nums[:3]...))
 
-		s.Show("nums", nums)
-		nums = append(nums, rand.Intn(9)+1)
+	// Solution #2
+	mine := append([]int(nil), nums[:3]...)
 
-		time.Sleep(time.Second / 4)
-	}
+	// ----------------------------------------
+	// DON'T TOUCH THE FOLLOWING CODE
+	//
+	// This code changes the elements of the nums
+	// slice.
+	//
+	fmt.Println("Mine         :", mine)
+	fmt.Println("Original nums:", nums[:3])
 }
