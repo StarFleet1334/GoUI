@@ -1,142 +1,131 @@
 package main
 
-import (
-	"fmt"
-	"github.com/inancgumus/prettyslice"
-)
-
-type collection []string
+import s "github.com/inancgumus/prettyslice"
 
 func main() {
-	// --- #1 ---
-	// 1. create a new slice named: games
-	games := []string{}
-	//
-	// 2. print the length and capacity of the games slice
-	//fmt.Printf("Length of games slice: %d\n", len(games))
-	//fmt.Printf("Capacity of games slice: %d\n", cap(games))
 
+	// ########################################################
 	//
-	// 3. comment out the games slice
-	//    then declare it as an empty slice
+	// #1: Create a string slice: `names` with a length and
+	//     capacity of 5, and print it.
 	//
-	// 4. print the length and capacity of the games slice
-	//
-	// 5. append the elements: "pacman", "mario", "tetris", "doom"
-	games = append(games, "pacman", "mario", "tetris", "doom")
 
-	//
-	// 6. print the length and capacity of the games slice
-	//fmt.Printf("Length of games slice: %d\n", len(games))
-	//fmt.Printf("Capacity of games slice: %d\n", cap(games))
-	//
-	// 7. comment out everything
-	//
-	// 8. declare the games slice again using a slice literal
-	//    (use the same elements from step 5)
+	names := make([]string, 5)
 
-	// --- #2 ---
-	// 1. use a loop from 0 to 4 to slice the games slice, element by element.
-	for i := 0; i <= len(games); i++ {
-		s := games[:i]
-		prettyslice.Show("After", s)
-	}
-
-	//
-	// 2. print its length and capacity along the way (in the loop).
-
-	fmt.Println()
-	// for ... {
-	// 	fmt.Printf("games[:%d]'s len: %d cap: %d\n", ...)
-	// }
-
-	// --- #3 ---
-	// 1. slice the games slice up to zero element
-	//    (save the result to a new slice named: "zero")
-	zero := games[:0]
-	//
-	// 2. print the games and the new slice's len and cap
-	prettyslice.Show("Zero", zero)
-
-	//
-	// 3. append a new element to the new slice
-	//
-	// 4. print the new slice's lens and caps
-	for _, v := range []string{"ultima", "dagger", "pong", "coldspot", "zetra"} {
-		zero = append(zero, v)
-		prettyslice.Show("Zero (updated)", zero)
-	}
-
-	prettyslice.Show("Games", games)
-	//
-	// 5. repeat the last two steps 5 times (use a loop)
-	//
-	// 6. notice the growth of the capacity after the 5th append
-	//
-	// Use this slice's elements to append to the new slice:
-	// []string{"ultima", "dagger", "pong", "coldspot", "zetra"}
-	fmt.Println()
-
-	// zero := ...
-	// fmt.Printf("games's     len: %d cap: %d\n", ...)
-	// fmt.Printf("zero's      len: %d cap: %d\n", ...)
-
-	// for ... {
-	//   ...
-	//   fmt.Printf("zero's      len: %d cap: %d\n", ...)
-	// }
-
-	// --- #4 ---
-	// using a range loop, slice the zero slice element by element,
-	// and print its length and capacity along the way.
-	//
-	// observe that, the range loop only loops for the length, not the cap.
-	fmt.Println()
-
-	// for ... {
-	//   s := zero[:n]
-	//   fmt.Printf("zero[:%d]'s  len: %d cap: %d\n", ...)
-	// }
-
-	// --- #5 ---
-	// 1. do the 3rd step above again but this time, start by slicing
-	//    the zero slice up to its capacity (use the cap function).
-	//
-	// 2. print the elements of the zero slice in the loop.
-	fmt.Println()
-
-	// zero = ...
-	// for ... {
-	//   fmt.Printf("zero[:%d]'s  len: %d cap: %d - %q\n", ...)
-	// }
-
-	// --- #6 ---
-	// 1. change the one of the elements of the zero slice
-	//
-	// 2. change the same element of the games slice
-	//
-	// 3. print the games and the zero slices
-	//
-	// 4. observe that they don't have the same backing array
-	fmt.Println()
-
-	fmt.Println()
-
-	zero[0] = "command & conquer"
-	games[0] = "red alert"
-	fmt.Printf("zero  : %q\n", zero)
-	fmt.Printf("games : %q\n", games)
 	// ...
-	// fmt.Printf("zero  : %q\n", zero)
-	// fmt.Printf("games : %q\n", games)
+	s.Show("1st step", names)
 
-	// --- #7 ---
-	// try to slice the games slice beyond its capacity
+	// ########################################################
+	//
+	// #2: Append the following names to the names slice:
+	//
+	//     "einstein", "tesla", "aristotle"
+	//
+	//     Print the names slice.
+	//
+	//     Observe how the slice and its backing array change.
+	//
+	//
+	// ...
+	s.Show("2nd step", names)
 
-	// --- #7 ---
-	// uncomment and see the error.
-	_ = games[:cap(games)+1]
-	//or:
-	_ = games[:5]
+	// ########################################################
+	//
+	// #3: Overwrite the name slice by creating a new slice
+	//     using make().
+	//
+	//     Adjust the make() function so that it creates a
+	//     slice with capacity of 5, and puts the slice pointer
+	//     to the first index.
+	//
+	//     Then append the following names to the slice:
+	//
+	//     "einstein", "tesla", "aristotle"
+	//
+	//     Expected output:
+	//     ["einstein", "tesla", "aristotle" "" ""]
+	//
+	//
+	// ...
+	names = append(names[:0], "einstein", "tesla", "aristotle")
+	s.Show("3rd step", names)
 
+	// ########################################################
+	//
+	// #4: Copy only the first two elements of the following
+	//     array to the last two elements of the `names` slice.
+	//
+	//     Print the names slice, you should see 5 elements.
+	//     So, do not forget extending the slice.
+	//
+	//     Observe how its backing array stays the same.
+	//
+	//
+	// Array (uncomment):
+	moreNames := [...]string{"plato", "khayyam", "ptolemy"}
+	//
+	// ...
+	//
+	copy(names[3:5], moreNames[:2])
+	s.Show("4th step (before)", names)
+
+	names = names[:cap(names)]
+	s.Show("4th step (after)", names)
+
+	// ########################################################
+	//
+	// #5:  Only copy the last 3 elements of the `names` slice
+	//      to a new slice: `clone`.
+	//
+	//     Append the first two elements of the `names` to the
+	//    `clone`.
+	//
+	//     Ensure that after appending no new backing array
+	//     allocations occur for the `clone` slice.
+	//
+	//     Print the clone slice before and after the append.
+	//
+	//
+	// ...
+	clone := make([]string, 3, 5)
+	s.Show("5th step (before clone)", clone)
+	//
+	// ...
+	copy(clone, names[2:])
+	s.Show("5th step (after clone)", clone)
+
+	clone = append(clone, names[:2]...)
+
+	s.Show("5th step (after append)", clone)
+
+	// ########################################################
+	//
+	// #6: Slice the `clone` slice between 2nd and 4th (inclusive)
+	//     elements into a new slice: `sliced`.
+	//
+	//     Append "hypatia" to the `sliced`.
+	//
+	//     Ensure that new backing array allocation "occurs".
+	//
+	//       Change the 3rd element of the `clone` slice
+	//       to "elder".
+	//
+	//       Doing so should not change any elements of
+	//       the `sliced` slice.
+	//
+	//     Print the `clone` and `sliced` slices.
+	//
+	//
+	// ...
+	sliced := clone[1:4:4]
+	sliced = append(sliced, "hypatia")
+
+	clone[3] = "elder"
+	s.Show("6th step", clone, sliced)
+}
+
+func init() {
+	s.PrintBacking = true // prints the backing array
+	s.MaxPerLine = 10     // prints 10 slice elements per line
+	s.Width = 60          // prints 60 character per line
 }
