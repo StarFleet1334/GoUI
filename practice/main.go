@@ -1,131 +1,83 @@
 package main
 
-import s "github.com/inancgumus/prettyslice"
+import (
+	"fmt"
+	"practice/api"
+)
+
+// ---------------------------------------------------------
+// EXERCISE: Limit the backing array sharing
+//
+//  GOAL
+//
+//    Limit the capacity of the slice that is returned
+//    from the `Read` function. Read on for more details.
+//
+//
+//  BEFORE YOU START
+//
+//    In this exercise: API means the api package. It's in the
+//    api folder. You need to change the code in the `api/api.go`
+//    to solve this exercise, and you need import the api
+//    package.
+//
+//
+//  WHAT IS THE PROBLEM?
+//
+//    `Read` function of the api package returns a portion of
+//    its `temps` slice. Below, `main()` saves it to the
+//    `received` slice.
+//
+//    `main()` appends to the `received` slice but doing so
+//    also changes the backing array of the `temps` slice.
+//    We don't want that.
+//
+//    `main()` can change the part of the `temps` slice
+//    that is returned from the `Read()`, but it shouldn't
+//    be able to change the elements in the rest of the
+//    `temps`.
+//
+//
+//  WHAT YOU NEED TO DO?
+//
+//    So you need to limit the capacity of the returned
+//    slice somehow. Remember: `received` and `temps`
+//    share the same backing array. So, appending to it
+//    can overwrite the same backing array.
+//
+//
+// CURRENT
+//
+//                           | |
+//                           v v
+//   api.temps     : [5 10 3 1 3 80 90]
+//   main.received : [5 10 3 1 3]
+//                           ^ ^ append changes the `temps`
+//                               slice's backing array.
+//
+//
+//
+// EXPECTED
+//
+//   The corrected api package does not allow the `main()` to
+//   change unreturned portion of the temps slice's backing array.
+//                           |  |
+//                           v  v
+//   api.temps     : [5 10 3 25 45 80 90]
+//   main.received : [5 10 3 1 3]
+//
+// ---------------------------------------------------------
 
 func main() {
+	// DO NOT CHANGE ANYTHING IN THIS CODE.
 
-	// ########################################################
-	//
-	// #1: Create a string slice: `names` with a length and
-	//     capacity of 5, and print it.
-	//
+	// get the first three elements from api.temps
+	received := api.Read(0, 3)
 
-	names := make([]string, 5)
+	// append changes the api package's temps slice's
+	// backing array as well.
+	received = append(received, []int{1, 3}...)
 
-	// ...
-	s.Show("1st step", names)
-
-	// ########################################################
-	//
-	// #2: Append the following names to the names slice:
-	//
-	//     "einstein", "tesla", "aristotle"
-	//
-	//     Print the names slice.
-	//
-	//     Observe how the slice and its backing array change.
-	//
-	//
-	// ...
-	s.Show("2nd step", names)
-
-	// ########################################################
-	//
-	// #3: Overwrite the name slice by creating a new slice
-	//     using make().
-	//
-	//     Adjust the make() function so that it creates a
-	//     slice with capacity of 5, and puts the slice pointer
-	//     to the first index.
-	//
-	//     Then append the following names to the slice:
-	//
-	//     "einstein", "tesla", "aristotle"
-	//
-	//     Expected output:
-	//     ["einstein", "tesla", "aristotle" "" ""]
-	//
-	//
-	// ...
-	names = append(names[:0], "einstein", "tesla", "aristotle")
-	s.Show("3rd step", names)
-
-	// ########################################################
-	//
-	// #4: Copy only the first two elements of the following
-	//     array to the last two elements of the `names` slice.
-	//
-	//     Print the names slice, you should see 5 elements.
-	//     So, do not forget extending the slice.
-	//
-	//     Observe how its backing array stays the same.
-	//
-	//
-	// Array (uncomment):
-	moreNames := [...]string{"plato", "khayyam", "ptolemy"}
-	//
-	// ...
-	//
-	copy(names[3:5], moreNames[:2])
-	s.Show("4th step (before)", names)
-
-	names = names[:cap(names)]
-	s.Show("4th step (after)", names)
-
-	// ########################################################
-	//
-	// #5:  Only copy the last 3 elements of the `names` slice
-	//      to a new slice: `clone`.
-	//
-	//     Append the first two elements of the `names` to the
-	//    `clone`.
-	//
-	//     Ensure that after appending no new backing array
-	//     allocations occur for the `clone` slice.
-	//
-	//     Print the clone slice before and after the append.
-	//
-	//
-	// ...
-	clone := make([]string, 3, 5)
-	s.Show("5th step (before clone)", clone)
-	//
-	// ...
-	copy(clone, names[2:])
-	s.Show("5th step (after clone)", clone)
-
-	clone = append(clone, names[:2]...)
-
-	s.Show("5th step (after append)", clone)
-
-	// ########################################################
-	//
-	// #6: Slice the `clone` slice between 2nd and 4th (inclusive)
-	//     elements into a new slice: `sliced`.
-	//
-	//     Append "hypatia" to the `sliced`.
-	//
-	//     Ensure that new backing array allocation "occurs".
-	//
-	//       Change the 3rd element of the `clone` slice
-	//       to "elder".
-	//
-	//       Doing so should not change any elements of
-	//       the `sliced` slice.
-	//
-	//     Print the `clone` and `sliced` slices.
-	//
-	//
-	// ...
-	sliced := clone[1:4:4]
-	sliced = append(sliced, "hypatia")
-
-	clone[3] = "elder"
-	s.Show("6th step", clone, sliced)
-}
-
-func init() {
-	s.PrintBacking = true // prints the backing array
-	s.MaxPerLine = 10     // prints 10 slice elements per line
-	s.Width = 60          // prints 60 character per line
+	fmt.Println("api.temps     :", api.All())
+	fmt.Println("main.received :", received)
 }
